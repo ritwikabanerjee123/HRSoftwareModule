@@ -110,7 +110,7 @@ use Cake\ORM\TableRegistry;
             <tr>
             <td>
     <?php
-    if($empGeneralInfo->photoPath=='upload/')
+    if($empGeneralInfo->photoPath=='upload/' || $empGeneralInfo->photoPath=='')
     echo "<img alt='photo' style='width:50px; height:50px; border-radius: 50%;' src='images/User.png'>";
     else
     echo "<img alt='photo' style='width:50px; height:50px; border-radius: 50%;' src='$empGeneralInfo->photoPath'>";
