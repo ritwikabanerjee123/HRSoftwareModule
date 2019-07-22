@@ -79,6 +79,22 @@ use Cake\Routing\Router;
         <div class="row pageheadertop mb-3">
         <div class="col"><h2>View Employee Records</h2></div>
         <div class="col-auto"><button type="button" class="btn orangebutton rounded-circle"><i class="icon-add-plus-button"></i></button></div>
+        <div class="col-auto">
+          <div class="form-group addcustomcss">
+             <select class="form-control rounded-0">
+              <option>Month</option>
+             
+            </select> 
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group addcustomcss">
+             <select class="form-control rounded-0">
+              <option>Year</option>
+             
+            </select> 
+          </div>
+        </div>
       </div>
       <div>
         <table class="table employtable">

@@ -81,20 +81,11 @@ while($row3 = $result1->fetch_assoc()){
       <div class="bodypart">
         <div class="row pageheadertop mb-3">
         <div class="col"><h2>View Attendance List: <?= $month?>-<?= $year?></h2></div>
+        
         <div class="col-auto">
           <div class="form-group addcustomcss">
-          <select class="form-control rounded-0">
-          <option>Employee ID</option>
-          <?php 
-          $result_gen = mysqli_query($conn,"SELECT * FROM emp_general_info");
-          $row_gen = mysqli_num_rows($result_gen);
-          if($row_gen){
-            while($result_gen=$result_gen->fetch_assoc()){?>
-              <option><?=$result_gen['empId']?></option><?php
-            }
-          }
-          ?>
-         
+             <select class="form-control rounded-0">
+              <option>Work duration</option>
               
             </select> 
           </div>
@@ -103,9 +94,47 @@ while($row3 = $result1->fetch_assoc()){
           <div class="form-group addcustomcss">
              <select class="form-control rounded-0">
               <option>Employee Name</option>
+              <?php 
+               $result_gen = mysqli_query($conn,"SELECT * FROM emp_general_info");
+               $row_gen = mysqli_num_rows($result_gen);
+              if($row_gen > 0){
+                while($result_data_gen=$result_gen->fetch_assoc()){?>
+                  <option><?=$result_data_gen['empName']?></option>
+                  <?php
+                }
+              }?>
             </select> 
           </div>
         </div>
+        <div class="col-auto">
+          <div class="form-group addcustomcss">
+          
+              <div class="w-50 d-inline-block">
+              
+              <div class="form-check">
+                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                <?php echo $this->Form->checkbox('LateBy'); ?> LateBy
+              </div>
+            
+          </div>
+        </div>
+        <div class="col-auto">
+        <div class="form-group addcustomcss">
+              <div class="w-50 d-inline-block">
+              
+              <div class="form-check">
+                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                <h2>Attendance Status</h2>
+                <input type="radio" name="all" value="all">All</br>
+                <input type="radio" name="absent" value="absent">Absent</br>
+                <input type="radio" name="present" value="present">Present
+
+              </div>
+            </div>
+      </div>
+      <div><input type="button" name="reset" value="reset"></div>
+      <div><input type="button" name="filter" value="filter"></div>
+</div>
         <div class="col-auto"><button type="button" class="btn orangebutton rounded-circle" data-toggle="modal" data-target="#errormessage"><i class="icon-download-1"></i></button></div>
       </div>
       <div>
