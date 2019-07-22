@@ -337,7 +337,47 @@ use Cake\ORM\TableRegistry;
 
     
     </section>
- 
+    <div class="modal fade" id="successmessage" tabindex="-1" role="dialog" aria-labelledby="successmessage" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0 pb-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="icon-cancel-1"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center messagestatuspop">
+        <div class="iconstatus redcolr mb-3"><i class="icon-error"></i></div>
+        <h4 class="mb-3">Success</h4>
+        
+        <p class="mb-3">Successfully Updated</p>
+        
+      </div>
+     
+      <div class="modal-footer border-top-0 justify-content-center mb-3">
+        <button type="button" onclick="jQuery('#successmessage').modal('hide');" class="btn bluebutton">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="errormessage" tabindex="-1" role="dialog" aria-labelledby="errormessage" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0 pb-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="icon-cancel-1"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center messagestatuspop">
+        <div class="iconstatus redcolr mb-3"><i class="icon-error"></i></div>
+        <h4 class="mb-3">Error</h4>
+        <p class="mb-3">Something went wrong!</p>
+      </div>
+      <div class="modal-footer border-top-0 justify-content-center mb-3">
+        <button type="button" class="btn bluebutton">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
