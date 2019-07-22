@@ -91,7 +91,7 @@ use Cake\ORM\TableRegistry;
      
       </div>
       <div>
-        <table class="table employtable">
+        <table class="table employtable" id="changeActiveStatus">
   <thead>
     <tr>
       <th scope="col">Employee</th>
@@ -108,7 +108,13 @@ use Cake\ORM\TableRegistry;
   <tbody>
   <?php foreach ($empGeneralInfo as $empGeneralInfo): ?>
             <tr>
-            <td><?php echo "<img alt='photo' style='width:50px; height:50px; border-radius: 50%;' src='$empGeneralInfo->photoPath'>" ?></td>
+            <td>
+    <?php
+    if($empGeneralInfo->photoPath=='')
+    echo "<img alt='photo' style='width:50px; height:50px; border-radius: 50%;' src='images/User.png'>";
+    else
+    echo "<img alt='photo' style='width:50px; height:50px; border-radius: 50%;' src='$empGeneralInfo->photoPath'>";
+    ?></td>
                 <td>
                   
                   <a href="<?php echo Router::url(['controller'=>'EmpGeneralInfo','action'=>'view',$empGeneralInfo->empId]) ?>" style='color:#007bff; cursor:pointer;'><?php echo $empGeneralInfo->empName ?></a>
@@ -145,7 +151,7 @@ use Cake\ORM\TableRegistry;
             
                 <td class="actions">
                   
-                <a style='color:black;' href="<?php echo Router::url(['controller'=>'AllRecordsEdit','action'=>'index' ,'id'=>base64_encode($empGeneralInfo->empId)]); ?>" ><i class='icon-pencil'></i>  </a>
+                <a style='color:black;' href="<?php echo Router::url(['controller'=>'AllRecordsEdit','action'=>'index' ,'id'=>base64_encode($empGeneralInfo->empId),'div'=>'5' ]); ?>" ><i class='icon-pencil'></i>  </a>
                <?php echo "&nbsp;";
 
                 ///////////////
@@ -159,7 +165,7 @@ use Cake\ORM\TableRegistry;
 
                 }
                
-                echo " <a onClick='deleteS($empGeneralInfo->empId);' href='javascript:void(0)'><i class='icon-trash-1'></i>  </a>";
+                echo " <a data-toggle='modal' data-target='#confirmModal'  onClick='deleteS($empGeneralInfo->empId);' href='javascript:void(0)'><i class='icon-trash-1'></i>  </a>";
 
                 
                 
@@ -277,7 +283,7 @@ use Cake\ORM\TableRegistry;
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn redbutton" data-dismiss="modal">Cancel</button>
-        <button onclick="uploadExcel();" type="button" class="btn bluebutton">Save</button>
+        <button onclick="uploadExcel();"  type="button" class="btn bluebutton">Save</button>
       </div>
     </div>
   </div>
@@ -300,7 +306,7 @@ use Cake\ORM\TableRegistry;
       </div>
      
       <div class="modal-footer border-top-0 justify-content-center mb-3">
-        <?php echo "<button type='button' onClick='whenYes(,3)' class='btn bluebutton'>Yes</button>" ?>
+        <?php echo "<button type='button' data-dismiss='modal' aria-label='Close' onClick='onclickFunction(3,3);' class='btn bluebutton'>Yes</button>" ?>
       </div>
     </div>
   </div>
@@ -344,45 +350,11 @@ use Cake\ORM\TableRegistry;
   </body>
   <script>
 
-var IdDelete = 0;
+var IdDelete = '';
 function deleteS(id){
-  console.log("tst");
- 
-          //  var attr = $(this).attr('data-val');
-         //   IdDelete = attr;
-
-            document.getElementById("xyz").value = id;
-            $('#confirmModal').modal("show");
-           
+  IdDelete = id;         
 }     
- function whenYes(aId,changeStatus) {
-           
-          
-            console.log(aId);
-            $.ajax({
-        type: "POST",
-        url: "changeStatus.php",
-        data: {
-            aId:aId,
-            changeId:changeStatus
 
-        },
-        success: function (data){
-         
-       location.reload();
-        }
-    });
-
-
-           
-           // Hide and reset valu
-
-           console.log(IdDelete);
-           $('#confirmModal').modal("hide");
-           IdDelete = 0;
-
-          
-       }
 
   function uploadExcel(){
     var form_data = new FormData(); 
@@ -396,9 +368,11 @@ function deleteS(id){
         contentType: false,
         success: function (data){
           //alert(data);
-          $('#successmessage').modal("show");
+          
           $('#exampleModal2').modal("hide");
-          location.reload();
+          $('#successmessage').modal("show");
+          $("#changeActiveStatus").load(" #changeActiveStatus");
+          
         },
         error: function(data){
           $('#errormessage').modal("show");
@@ -411,6 +385,11 @@ function deleteS(id){
   
 
    function onclickFunction(aId,changeStatus){
+     console.log("asdasd");
+     if(changeStatus==3)
+     {
+       aId=IdDelete;
+     }
     $.ajax({
         type: "POST",
         url: "changeStatus.php",
@@ -420,7 +399,8 @@ function deleteS(id){
 
         },
         success: function (data){
-          location.reload();
+          
+          $("#changeActiveStatus").load(" #changeActiveStatus");
         }
     });
 
@@ -443,8 +423,6 @@ $('body').on('change', '#excelSheet', function() {
          //console.log(x);
   $( "#replaceFile" ).replaceWith("<li><div  class='imageuploadsect'><p style='text-align:center; overflow:hidden height:inherit; width:inherit;' class='m-0'>"+x+"</p></div></li>");
   
-
-
 } 
 });
      
@@ -472,17 +450,3 @@ $(document).ready(function(){
       $('#successmessage').trigger('focus')
       });
     </script>
-<?php
-// require('XLSXReader.php');
-// $xlsx = new XLSXReader('test.xlsx');
-// $data = $xlsx->getSheetData('Sheet1');
-// foreach($data as $temp)
-// {
-// 	foreach($temp as $test)
-// 	{
-// 		echo $test."<br>";
-// 	}
-// }
-
-
-?>
