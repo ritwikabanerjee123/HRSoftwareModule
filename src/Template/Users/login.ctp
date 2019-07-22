@@ -16,75 +16,57 @@
   </head>
   <body>
     <div class="loginbody vh-height">
-
-    <!-- body start here -->
+  <!-- <div class="index large-4 medium-4 large-offset-4 cloumns">
+    
+    <div class="panel"> -->
     <div class="logincontainer d-flex align-items-center">
       <div class="container">
         <div class="text-center mb-5"><img src="images/logo.png" class="logo" alt="Navsoft Training" title="Navsoft Training"></div>
         <div class="loginbox">
-          <h2 class="mb-4 text-center"><i class="icon-avatar-inside-a-circle mb-4"></i> User Login</h2>
-          <?= $this->Form->create(); ?>
-          <?php
-            if($_COOKIE["p11"] && $_COOKIE["p22"])
+        <h2 class="mb-4 text-center"><i class="icon-avatar-inside-a-circle mb-4"></i> User Login</h2>
+        
+        <?= $this->Form->create(); ?>
+        <?php
+            if($_COOKIE["p1"] && $_COOKIE["p5"])
             {
-              echo  $this->Form->input('username',array(
-                'value' => $_COOKIE['p11'],
-                'class'=>'form-group addcustomcss mb-sm-4'
-                
+            echo  $this->Form->input('username',array(
+                'value' => $_COOKIE['p1']
             ));
             echo  $this->Form->input('password',array(
-              'value' => $_COOKIE['p22'],
-              'class'=>'form-group addcustomcss mb-sm-4'
-              
-          ));
-           // echo ' <div class="form-group addcustomcss mb-sm-4"><input name="username" value="$_COOKIE[p3]" class="form-control rounded-0" type="text" placeholder="username"></div>';  
-           
-           // echo ' <div class="form-group addcustomcss mb-sm-4"><input name="password" value="$_COOKIE[p2]" class="form-control rounded-0" type="text" placeholder="username"></div>';  
-           
-          
+                'value' => $_COOKIE['p5']
+            ));
           
              }
-             else{
-              echo $this->Form->input('username',array(
-                'class'=>'form-group addcustomcss mb-sm-4'
-            ));
-            echo $this->Form->input('password',array(
-              'class'=>'form-group addcustomcss mb-sm-4'
-          ));
-
-              //echo  '<div class="form-group addcustomcss mb-sm-4"><input name="username" class="form-control rounded-0" type="text" placeholder="username"></div>';
-              //echo  '<div class="form-group addcustomcss mb-sm-4"><input name="password" class="form-control rounded-0" type="password" placeholder="password"></div>';
+             else{?>
+                <!-- <div class="form-group addcustomcss mb-sm-4"><input class="form-control rounded-0" type="text" placeholder="Nith Nadarajah" name="username"></div>
+                <div class="form-group addcustomcss mb-sm-4"><input class="form-control rounded-0" type="password" placeholder="password" name="password"></div> -->
+                <?php
+                echo $this->Form->input('username');
+               echo $this->Form->input('password');
+              
              }
 
         ?>
-
-          
-          <div class="form-group addcustomcss mb-sm-4">
-            <div class="w-50 d-inline-block">
+             <div class="form-group addcustomcss mb-sm-4">
+              <div class="w-50 d-inline-block">
+              
               <div class="form-check">
                 <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
-                <!-- <label class="form-check-label" for="exampleCheck1">Remember me</label> -->
-                <?php echo $this->Form->checkbox('remember_me');?>Remember me
-
+                <?php echo $this->Form->checkbox('remember_me'); ?> Remember Me
               </div>
             </div>
-            <div class="w-50 d-inline-block text-right" style="margin-left: -5px;"><a href="">Forgot password</a></div>
-          </div>
-          <?= $this->Form->button(__('Sign in'),['class'=>'btn bluebutton rounded-0 w-100']); ?>
-        <!-- <button type="button" class="btn bluebutton rounded-0 w-100">Sign In</button> -->
-        </div>
+            
+        <div class="w-50 d-inline-block text-right" style="margin-left: -5px;"><?php echo "<a href='http://localhost/HrSoft/users/forget'>forgot password?</a>" ?> </div>
+        
+            </div>
+
+        <?= $this->Form->button('Login',['class'=>'btn bluebutton rounded-0 w-100']);?>
+            </div>
+            </div>
+    </div>
         <?= $this->Form->end();?>
-      </div>
-    </div>
-    <!-- body start here -->
-
-
-    <!-- footer div start here -->
-    <!-- <footer><p class="mb-0">©2019 GolfTown Golf Company, Inc. All Rights Reserved.</p></footer> -->
-    <!-- footer div start here -->
-    </div>
-
-    <!-- Optional JavaScript -->
+            </div>
+      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -98,3 +80,5 @@
     
   </body>
 </html>
+
+   

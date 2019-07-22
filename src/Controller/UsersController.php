@@ -84,7 +84,7 @@ public function setpassword(){
             $subject = 'Hi buddy, i got a message for you.';
             //$message = 'hafhakf';
 
-                $message = 'http://localhost/HrSoftware1/users/setpassword';
+                $message = 'http://localhost/HrSoft/users/setpassword';
                 $message= $message.'?email='.$encodedEmail;
                 echo $message;
                 // $mail = $this->Email->send_mail($email, $subject, $message);
@@ -121,33 +121,28 @@ public function setpassword(){
         if($this->request->is('post'))
         {
             
-            $user= $this->Auth->identify();
-            echo $this->request->data['username']; 
-                       
-            echo $this->request->data['password'];
-            debug($this->request->getData());
-            debug($user);
-            if($user){
-                echo "tesgd";
            
+            $user= $this->Auth->identify();
+            var_dump($user);
+            if($user){
                 $this->Auth->setUser($user);
                 
                                 if ($this->request->data['remember_me'] == 1 ) {
                                    
-                                    setcookie('p11', $this->request->data['username'], time() + (86400 * 30)); 
+                                    setcookie('p1', $this->request->data['username'], time() + (86400 * 30), "/"); 
                        
-                                    setcookie('p22', $this->request->data['password'], time() + (86400 * 30)); 
+                                    setcookie('p5', $this->request->data['password'], time() + (86400 * 30), "/"); 
                                    
                                 }
                                 else{
 
-                                    setcookie('p11','');
-                                    setcookie('p22','');
+                                    setcookie('p1','');
+                                    setcookie('p5','');
                                 }
                                
 
 
-                return $this->redirect(['controller'=>'Dashboard','action'=>'index']);
+                return $this->redirect(['controller'=>'Dashboard','action'=>'index/']);
             }
             $this->Flash->error(_('incorrect'));
             // var_dump($user);
@@ -158,11 +153,12 @@ public function setpassword(){
     {
         return $this->redirect($this->Auth->logout());
     }
-    public function index(){
+    public function index()
+    {
         $users = $this->paginate($this->Users);
+
         $this->set(compact('users'));
     }
-   
 
     /**
      * View method
