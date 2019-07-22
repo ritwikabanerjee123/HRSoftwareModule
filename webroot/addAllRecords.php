@@ -1,6 +1,7 @@
 <?php
 // print_r($_FILES);print_r($_POST);
 //test
+//bidisha
 $conn = mysqli_connect("localhost","root","","hr_software");
 $myPhoto= $_FILES['profilePhoto']['name'];
 $myPhotoTemp= $_FILES['profilePhoto']['tmp_name'];
