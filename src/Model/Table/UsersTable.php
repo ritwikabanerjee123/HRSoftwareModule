@@ -45,21 +45,35 @@ class UsersTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->scalar('username')
             ->maxLength('username', 200)
-            ->allowEmptyString('username');
+            ->requirePresence('username', 'create')
+            ->notEmptyString('username');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 200)
-            ->allowEmptyString('password');
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password');
 
         $validator
             ->email('email')
-            ->allowEmptyString('email');
+            ->maxLength('password', 200)
+            ->requirePresence('email', 'create')
+            ->notEmptyString('email');
+
+        $validator
+            ->scalar('documentName')
+            ->maxLength('documentName', 255)
+            ->allowEmptyString('documentName');
+
+        $validator
+            ->scalar('documentPath')
+            ->maxLength('documentPath', 255)
+            ->allowEmptyString('documentPath');
 
         return $validator;
     }
