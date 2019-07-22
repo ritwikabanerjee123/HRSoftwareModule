@@ -83,8 +83,19 @@ while($row3 = $result1->fetch_assoc()){
         <div class="col"><h2>View Attendance List: <?= $month?>-<?= $year?></h2></div>
         <div class="col-auto">
           <div class="form-group addcustomcss">
-             <select class="form-control rounded-0">
-              <option>Employee ID</option>
+          <select class="form-control rounded-0">
+          <option>Employee ID</option>
+          <?php 
+          $result_gen = mysqli_query($conn,"SELECT * FROM emp_general_info");
+          $row_gen = mysqli_num_rows($result_gen);
+          if($row_gen){
+            while($result_gen=$result_gen->fetch_assoc()){?>
+              <option><?=$result_gen['empId']?></option><?php
+            }
+          }
+          ?>
+         
+              
             </select> 
           </div>
         </div>
