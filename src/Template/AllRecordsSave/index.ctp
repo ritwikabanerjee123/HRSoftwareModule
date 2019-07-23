@@ -393,7 +393,47 @@ foreach($result as $temp)
     <!-- right part section end here -->    
     </section>
 
-
+    <div class="modal fade" id="successmessage" tabindex="-1" role="dialog" aria-labelledby="successmessage" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0 pb-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="icon-cancel-1"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center messagestatuspop">
+        <div class="iconstatus redcolr mb-3"><i class="icon-error"></i></div>
+        <h4 class="mb-3">Success</h4>
+        
+        <p class="mb-3">Successfully Updated</p>
+        
+      </div>
+     
+      <div class="modal-footer border-top-0 justify-content-center mb-3">
+        <button type="button" onclick="javascipt:window.location.href='<?php echo Router::url(['controller'=>'EmpGeneralInfo','action'=>'index']) ?>' " class="btn bluebutton">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="errormessage" tabindex="-1" role="dialog" aria-labelledby="errormessage" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0 pb-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="icon-cancel-1"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center messagestatuspop">
+        <div class="iconstatus redcolr mb-3"><i class="icon-error"></i></div>
+        <h4 class="mb-3">Error</h4>
+        <p class="mb-3">Something went wrong!</p>
+      </div>
+      <div class="modal-footer border-top-0 justify-content-center mb-3">
+        <button type="button" class="btn bluebutton">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
     
 
     <!-- Optional JavaScript -->
@@ -497,7 +537,12 @@ console.log(empName);
         processData: false,
         contentType: false,
         success: function (data){
-         alert(data)
+          $('#successmessage').modal("show");
+
+        },
+        error: function(data)
+        {
+          $('#errormessage').modal("show");
         }
     });
 }
@@ -508,7 +553,6 @@ console.log(empName);
 }
 */
 $('body').on('change', '#getPhoto', function() {
-  console.log("tst");
   $( "#replaceImg" ).replaceWith( "<img class='imageupload' id='profilePhoto' style='overflow:hidden height:inherit; width:inherit;'>" );
   var reader = new FileReader();
 reader.onload = imageIsLoaded;
@@ -559,7 +603,7 @@ $(this).hide();
 });
 
 $('body').on('change', '#empAcademicFile', function() {
-  console.log("pppppp");
+
   var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) 
         {

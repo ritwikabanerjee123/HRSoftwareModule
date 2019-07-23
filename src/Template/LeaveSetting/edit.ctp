@@ -86,66 +86,120 @@ use Cake\Routing\Router;
         <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
           <label class="labelform">Financial Year</label>
-          <input id="" name="financial_year" value="<?= h($leaveSetting->financial_year) ?>" class="form-control rounded-0" width="100%"   />  
+          <!-- <input id="" name="financial_year" value="<?= h($leaveSetting->financial_year) ?>" class="form-control rounded-0" width="100%"   />   -->
+          <select id="financialYear"  name="financial_year" class="form-control rounded-0">
+             <option><?php echo "$leaveSetting->financial_year"?></option>
+             <?php 
+              $date = date("Y");
+              
+              for($i=1998; $i<=$date;$i++)
+                if($leaveSetting->financial_year==$i)
+                {
+                  continue;
+                }
+                else
+                  echo "<option>$i</option>";
+             ?>
+              
+            </select> 
+          
           </div>
         </div>
         <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
-            <input id="" value="<?= h($leaveSetting->starting_date) ?>" name="starting_date" class="form-control rounded-0" width="100%"   /> 
+          <label class="labelform">Season Tenure Start Date</label>
+            <input id="datepicker" value="<?= h($leaveSetting->starting_date) ?>" name="starting_date" class="form-control rounded-0" width="100%"   /> 
           </div>
         </div>
         <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
-            <input id="" value="<?= h($leaveSetting->ending_date) ?>" name="ending_date" class="form-control rounded-0" width="100%"   />
+          <label class="labelform">Season Tenure End Date</label>
+            <input id="datepicker2" value="<?= h($leaveSetting->ending_date) ?>" name="ending_date" class="form-control rounded-0" width="100%"   />
           </div>
         </div>
         <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
-            <input id="" value="<?= h($leaveSetting->holiday_group) ?>" name="holiday_group" class="form-control rounded-0" width="100%"    /> 
+          <label class="labelform">Holiday Group</label>
+            <!-- <input id="" value="<?= h($leaveSetting->holiday_group) ?>" name="holiday_group" class="form-control rounded-0" width="100%"    />  -->
+              <select name="holiday_group" class="form-control rounded-0">
+              <option value="h($leaveSetting->holiday_group)"><?php echo "$leaveSetting->holiday_group" ?></option>
+              <?php
+                $conn = mysqli_connect("localhost","root","","hr_software");
+                $dd_res=mysqli_query($conn,"Select group_name,leave_year from set_holiday");
+                while($r=mysqli_fetch_row($dd_res))
+                { 
+                  if(strtolower($r[0])!=strtolower($leaveSetting->holiday_group)){
+                    echo "<option value='$r[0]'> $r[0]</option>";
+                  }
+                }
+              ?>
+               </select>
           </div>
         </div>
         <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">No. of hours in full day</label>
             <input id="" value="<?= $this->Number->format($leaveSetting->no_of_hours) ?>" name="no_of_hours" class="form-control rounded-0" width="100%"   /> 
           </div>
         </div>
         <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">Default Shift</label>
             <input id="" value="<?= h($leaveSetting->shift) ?>" name="shift"  class="form-control rounded-0" width="100%"   /> 
           </div>
         </div>
         <div class="col-sm-3 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">Week Starts on</label>
             <input id="" value="<?= h($leaveSetting->week_start) ?>" name="week_start" class="form-control rounded-0" width="100%"   />             
           </div>
         </div>
         <div class="col-sm-3 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">Week Days Off</label>
             <input id="" value="<?= h($leaveSetting->weekly_days_off) ?>" name="weekly_days_off" class="form-control rounded-0" width="100%"   />                          
           </div>
         </div>
         <div class="col-sm-3 mb-2">
           <div class="form-group addcustomcss">
-            <input id="" value="<?= h($leaveSetting->leave_type) ?>" name="leave_type" class="form-control rounded-0" width="100%"   /> 
+          <label class="labelform">Leave Type</label>
+            <!-- <input id="" value="<?= h($leaveSetting->leave_type) ?>" name="leave_type" class="form-control rounded-0" width="100%"   />  -->
+            <select name="leave_type" class="form-control rounded-0">
+              <option value="h($leaveSetting->leave_type)"><?php echo "$leaveSetting->leave_type" ?></option>
+              <?php
+                $conn = mysqli_connect("localhost","root","","hr_software");
+                $dd_res=mysqli_query($conn,"Select leave_type,status from new_leave");
+                while($r=mysqli_fetch_row($dd_res))
+                { 
+                  if(strtolower($r[0])!=strtolower($leaveSetting->leave_type) && strtolower($r[1])=="active"){
+                    echo "<option value='$r[0]'> $r[0]</option>";
+                  }
+                }
+              ?>
+            </select>
           </div>
         </div>
         <div class="col-sm-3 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">No. of Holidays</label>
             <input id="" value="<?= $this->Number->format($leaveSetting->no_of_holiday) ?>" name="no_of_holiday" class="form-control rounded-0" width="100%"   /> 
           </div>
         </div>
-        <div class="col-sm-3 mb-2">
+        <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">Allowable leaves per month</label>
             <input id="" value="<?= $this->Number->format($leaveSetting->allow_per_month) ?>" name="allow_per_month" class="form-control rounded-0" width="100%"   /> 
           </div>
         </div>
-        <div class="col-sm-3 mb-2">
+        <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">Leave Threshold Limit</label>
             <input id="" value="<?= $this->Number->format($leaveSetting->threshold) ?>" name="threshold" class="form-control rounded-0" width="100%"   /> 
           </div>
         </div>
         <div class="col-sm-4 mb-2">
           <div class="form-group addcustomcss">
+          <label class="labelform">Leave Approved By</label>
             <input id="" value="<?= h($leaveSetting->approved_by) ?>"  name="approved_by" class="form-control rounded-0" width="100%"    /> 
           </div>
         </div>
@@ -155,3 +209,13 @@ use Cake\Routing\Router;
   </div>
     <?= $this->Form->end() ?>
 </div>
+</body>
+<script>
+  $('#datepicker').datepicker({
+      uiLibrary: 'bootstrap4'
+  });
+  $('#datepicker2').datepicker({
+      uiLibrary: 'bootstrap4'
+  });
+</script>
+</html>

@@ -13,10 +13,8 @@
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace App\Controller;
-
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-
 /**
  * Application Controller
  *
@@ -27,7 +25,6 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-
     /**
      * Initialization hook method.
      *
@@ -39,31 +36,30 @@ class AppController extends Controller
      */
     public function beforeFilter(Event $event){
         parent:: beforeFilter($event);
-        // $this->Auth->allow(['controller'=>'User']);
+        $this->Auth->allow(['controller'=>'User','action'=>'add','forget','setpassword']);
     }
     public function initialize()
     {
         parent::initialize();
-
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-    //  $this->loadComponent('Auth',[
-    //      'userModel' => 'Users',
-    //      'loginAction' => [
-    //          'controller' => 'Users',
-    //          'action' => 'login'
-    //      ],
-    //      'authenticate' => [
-    //          'Form' => [
-    //              'fields' => [
-    //                  'username' => 'username',
-    //                  'password' => 'password'
-    //              ]
-    //          ]
-    //      ]
-    //  ]);
+     $this->loadComponent('Auth',[
+         'userModel' => 'Users',
+         'loginAction' => [
+             'controller' => 'Users',
+             'action' => 'login'
+         ],
+         'authenticate' => [
+             'Form' => [
+                 'fields' => [
+                     'username' => 'username',
+                     'password' => 'password'
+                 ]
+             ]
+         ]
+     ]);
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html

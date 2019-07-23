@@ -171,6 +171,13 @@ $id=base64_decode($_GET['id']);
     <div id="home" class="tab-pane fade in active">
       <h3 class="mb-3">Employee General Information</h3>
       <div class="row">
+   
+   <?php
+      if($photoPath=='' || $photoPath=='upload/')
+      {
+        $photoPath='images/User.png';
+      }
+   ?>
         <div class="col-sm-1 mb-2"><a id='replaceImg'  onclick="document.getElementById('getPhoto').click()" class="imageupload"><img class="imageupload" src="<?php echo $photoPath?>" style='overflow:hidden height:inherit; width:inherit;' ?>" alt="Photo"></a></div>
         <input type='file' id="getPhoto"  style="display:none">
         <div class="col-sm-11  mb-2">
