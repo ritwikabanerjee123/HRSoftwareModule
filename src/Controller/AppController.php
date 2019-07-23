@@ -39,7 +39,7 @@ class AppController extends Controller
      */
     public function beforeFilter(Event $event){
         parent:: beforeFilter($event);
-        $this->Auth->allow(['controller'=>'User']);
+        // $this->Auth->allow(['controller'=>'User']);
     }
     public function initialize()
     {
@@ -49,21 +49,21 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-     $this->loadComponent('Auth',[
-         'userModel' => 'Users',
-         'loginAction' => [
-             'controller' => 'Users',
-             'action' => 'login'
-         ],
-         'authenticate' => [
-             'Form' => [
-                 'fields' => [
-                     'username' => 'username',
-                     'password' => 'password'
-                 ]
-             ]
-         ]
-     ]);
+    //  $this->loadComponent('Auth',[
+    //      'userModel' => 'Users',
+    //      'loginAction' => [
+    //          'controller' => 'Users',
+    //          'action' => 'login'
+    //      ],
+    //      'authenticate' => [
+    //          'Form' => [
+    //              'fields' => [
+    //                  'username' => 'username',
+    //                  'password' => 'password'
+    //              ]
+    //          ]
+    //      ]
+    //  ]);
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
